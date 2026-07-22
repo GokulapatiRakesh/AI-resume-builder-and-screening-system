@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom"; 
 import candidateIcon from "../assets/candidate.png";
 import recruiterIcon from "../assets/recruiter.png";
@@ -23,6 +23,15 @@ const UserRegRecruiter = () => {
 
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+  const OTP = "829749";
+
+const [emailVerified, setEmailVerified] = useState(false);
+const [showEmailPopup, setShowEmailPopup] = useState(false);
+const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+const [otpVerified, setOtpVerified] = useState(false);
+
+const inputRefs = useRef([]);
 
   const registrationData = [
     { id: "fullName", label: "Full Name", placeholder: "Thomas", type: "text" },
@@ -107,6 +116,50 @@ const UserRegRecruiter = () => {
     }
   };
 
+  const openVerificationPopup = () => {
+
+  if (!form.email) {
+    alert("Please enter email");
+    return;
+  }
+
+  setOtp(["","","","","",""]);
+  setOtpVerified(false);
+  setShowEmailPopup(true);
+};
+
+const handleOtpChange = (value,index) => {
+
+  if(!/^\d?$/.test(value)) return;
+
+  const updated=[...otp];
+  updated[index]=value;
+  setOtp(updated);
+
+  if(value && index<5){
+      inputRefs.current[index+1].focus();
+  }
+};
+
+const verifyOtp = () => {
+
+  if(otp.join("")===OTP){
+      setOtpVerified(true);
+  }else{
+      alert("Invalid OTP");
+  }
+};
+
+const continueVerification = () => {
+    setShowEmailPopup(false);
+    setShowSuccessPopup(true);
+};
+
+const finishVerification = () => {
+    setShowSuccessPopup(false);
+    setEmailVerified(true);
+};
+
   return (
     <div className="urr-container">
       {/* LEFT INFO SECTION */}
@@ -177,60 +230,161 @@ const UserRegRecruiter = () => {
             </button>
           </div>
 
-          <div className="urr-grid">
-            {registrationData.map((field) => (
-              <div className="urr-field-wrapper" key={field.id} style={{ display: "flex", flexDirection: "column" }}>
-                <label className="urr-field" style={{ position: "relative" }}>
-                  <span className="urr-label">{field.label}</span>
+        <div className="urr-grid">
+  {registrationData.map((field) => (
+    <div
+      className="urr-field-wrapper"
+      key={field.id}
+      style={{ display: "flex", flexDirection: "column" }}
+    >
+      <label className="urr-field" style={{ position: "relative" }}>
+        <span className="urr-label">{field.label}</span>
 
-                  {field.type === "select" ? (
-                    <select value={form[field.id] || ""} onChange={handleChange(field.id, field.type)}>
-                      <option value="" disabled hidden>Select {field.label}</option>
-                      {field.options.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
-                    </select>
-                  ) : (
-                    <div style={{ position: "relative", width: "100%" }}>
-                      <input
-                        type={
-                          field.id === "password"
-                            ? showPassword ? "text" : "password"
-                            : field.id === "confirmPassword"
-                            ? showConfirmPassword ? "text" : "password"
-                            : field.type
-                        }
-                        value={field.type === "file" ? undefined : (form[field.id] || "")}
-                        onChange={handleChange(field.id, field.type)}
-                        placeholder={field.placeholder}
-                        style={{ paddingRight: (field.id === "password" || field.id === "confirmPassword") ? "40px" : "10px" }}
-                      />
+        {field.type === "select" ? (
+          <select
+            value={form[field.id] || ""}
+            onChange={handleChange(field.id, field.type)}
+          >
+            <option value="" disabled hidden>
+              Select {field.label}
+            </option>
 
-                      {field.id === "password" && form[field.id] && (
-                        <img
-                          src={showPassword ? showPasswordIcon : hidePasswordIcon}
-                          alt="toggle password"
-                          onClick={() => setShowPassword(!showPassword)}
-                          style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", cursor: "pointer", width: "20px", height: "20px", zIndex: 2 }}
-                        />
-                      )}
-
-                      {field.id === "confirmPassword" && form[field.id] && (
-                        <img
-                          src={showConfirmPassword ? showPasswordIcon : hidePasswordIcon}
-                          alt="toggle confirm password"
-                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                          style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", cursor: "pointer", width: "20px", height: "20px", zIndex: 2 }}
-                        />
-                      )}
-                    </div>
-                  )}
-                </label>
-
-                {errors[field.id] && <small className="error-text" style={{ color: "red", fontSize: "12px", marginTop: "4px" }}>{errors[field.id]}</small>}
-              </div>
+            {field.options.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
             ))}
+          </select>
+        ) : field.id === "email" ? (
+
+          <div className="urr-email-wrapper">
+
+            <input
+              type="email"
+              value={form.email || ""}
+              placeholder={field.placeholder}
+              onChange={handleChange(field.id, field.type)}
+              disabled={emailVerified}
+            />
+
+            {!emailVerified ? (
+              <button
+                type="button"
+                className="urr-verify-btn"
+                onClick={openVerificationPopup}
+              >
+                Verify
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="urr-verified-btn"
+              >
+                Verified
+              </button>
+            )}
+
           </div>
+
+        ) : (
+          <div style={{ position: "relative", width: "100%" }}>
+            <input
+              type={
+                field.id === "password"
+                  ? showPassword
+                    ? "text"
+                    : "password"
+                  : field.id === "confirmPassword"
+                  ? showConfirmPassword
+                    ? "text"
+                    : "password"
+                  : field.type
+              }
+              value={
+                field.type === "file"
+                  ? undefined
+                  : form[field.id] || ""
+              }
+              onChange={handleChange(field.id, field.type)}
+              placeholder={field.placeholder}
+              style={{
+                paddingRight:
+                  field.id === "password" ||
+                  field.id === "confirmPassword"
+                    ? "40px"
+                    : "10px",
+              }}
+            />
+
+            {field.id === "password" && form[field.id] && (
+              <img
+                src={
+                  showPassword
+                    ? showPasswordIcon
+                    : hidePasswordIcon
+                }
+                alt="toggle password"
+                onClick={() =>
+                  setShowPassword(!showPassword)
+                }
+                style={{
+                  position: "absolute",
+                  right: "12px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                  width: "20px",
+                  height: "20px",
+                  zIndex: 2,
+                }}
+              />
+            )}
+
+            {field.id === "confirmPassword" &&
+              form[field.id] && (
+                <img
+                  src={
+                    showConfirmPassword
+                      ? showPasswordIcon
+                      : hidePasswordIcon
+                  }
+                  alt="toggle confirm password"
+                  onClick={() =>
+                    setShowConfirmPassword(
+                      !showConfirmPassword
+                    )
+                  }
+                  style={{
+                    position: "absolute",
+                    right: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                    width: "20px",
+                    height: "20px",
+                    zIndex: 2,
+                  }}
+                />
+              )}
+          </div>
+        )}
+      </label>
+
+      {errors[field.id] && (
+        <small
+          className="error-text"
+          style={{
+            color: "red",
+            fontSize: "12px",
+            marginTop: "4px",
+          }}
+        >
+          {errors[field.id]}
+        </small>
+      )}
+    </div>
+  ))}
+</div>
 
           <label className="urr-agree">
             <input
@@ -255,6 +409,84 @@ const UserRegRecruiter = () => {
 </p>
         </form>
       </div>
+      {/* ================= EMAIL VERIFICATION POPUP ================= */}
+
+{showEmailPopup && (
+  <div className="email-popup-overlay">
+    <div className="email-popup">
+
+      <div className="popup-icon">
+        📩
+      </div>
+
+      <h2>Email Verification</h2>
+
+      <p>We've Sent a Code To</p>
+
+      <strong>{form.email}</strong>
+
+      <p>Please enter it below</p>
+
+      <div className="otp-wrapper">
+        {otp.map((digit, index) => (
+          <input
+            key={index}
+            ref={(el) => (inputRefs.current[index] = el)}
+            type="text"
+            maxLength="1"
+            value={digit}
+            onChange={(e) =>
+              handleOtpChange(e.target.value, index)
+            }
+            className="otp-box"
+          />
+        ))}
+      </div>
+
+      {!otpVerified ? (
+        <button
+          className="popup-btn"
+          onClick={verifyOtp}
+        >
+          Verify
+        </button>
+      ) : (
+        <button
+          className="popup-btn"
+          onClick={continueVerification}
+        >
+          Continue
+        </button>
+      )}
+
+    </div>
+  </div>
+)}
+
+{/* ================= SUCCESS POPUP ================= */}
+
+{showSuccessPopup && (
+  <div className="email-popup-overlay">
+
+    <div className="success-popup">
+
+      <div className="success-icon">
+        ✅
+      </div>
+
+      <h2>Verification is Confirmed</h2>
+
+      <button
+        className="popup-btn"
+        onClick={finishVerification}
+      >
+        Continue
+      </button>
+
+    </div>
+
+  </div>
+)}
     </div>
   );
 };

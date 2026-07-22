@@ -1,17 +1,13 @@
 
-.urc-register-page-wrapper .urc-register-container  {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: nowrap;
-  padding: 1.25rem;
-  justify-content: center;
-  align-items: flex-start;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: #f8fafc;
-  /* height: 100vh;          */
-  box-sizing: border-box;
-  overflow-y: auto;
-  overflow-x: hidden;
+.urc-register-page-wrapper .urc-register-container{
+    display:flex;
+    width:100%;
+    max-width:1400px;
+    margin:auto;
+    gap:24px;
+    padding:20px;
+    align-items:flex-start;
+    box-sizing:border-box;
 }
 
 
@@ -723,165 +719,117 @@
 }
 
 
+/* ================= EMAIL VERIFY ================= */
 
-
-.urc-email-box{
-
-display:flex;
-
-align-items:center;
-
-border:1px solid #ddd;
-
-border-radius:10px;
-
-overflow:hidden;
-
+.urc-email-wrapper{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.urc-email-box input{
-
-flex:1;
-
-border:none;
-
-outline:none;
-
-padding:12px;
-
+.urc-email-wrapper input{
+    flex:1;
 }
 
-.verify-btn{
-
-margin-right:8px;
-
-padding:6px 14px;
-
-border:1px solid #ccc;
-
-background:#fff;
-
-color:#28a745;
-
-border-radius:6px;
-
-cursor:pointer;
-
+.urc-verify-btn{
+    height:40px;
+    padding:0 18px;
+    border:1px solid #2563eb;
+    background:#fff;
+    color:#2563eb;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
 }
 
-.verified-btn{
-
-margin-right:8px;
-
-padding:6px 14px;
-
-background:#e9f8ed;
-
-border:1px solid #28a745;
-
-color:#28a745;
-
-border-radius:6px;
-
-font-weight:600;
-
+.urc-verified-btn{
+    height:40px;
+    padding:0 18px;
+    border:none;
+    background:#16a34a;
+    color:#fff;
+    border-radius:8px;
+    font-weight:600;
 }
 
-.otp-modal{
+/* ================= POPUP ================= */
 
-position:fixed;
-
-top:0;
-
-left:0;
-
-right:0;
-
-bottom:0;
-
-background:rgba(0,0,0,.4);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-z-index:9999;
-
+.email-popup-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
 }
 
-.otp-card,
-.success-card{
-
-background:#fff;
-
-width:360px;
-
-padding:35px;
-
-border-radius:18px;
-
-text-align:center;
-
+.email-popup,
+.success-popup{
+    width:420px;
+    background:#fff;
+    border-radius:18px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
 
-.otp-boxes{
-
-display:flex;
-
-gap:10px;
-
-justify-content:center;
-
-margin:25px 0;
-
+.popup-icon{
+    width:70px;
+    height:70px;
+    background:#eff6ff;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:34px;
+    margin:auto;
+    margin-bottom:20px;
 }
 
-.otp-boxes input{
-
-width:45px;
-
-height:45px;
-
-font-size:22px;
-
-text-align:center;
-
-border:1px solid #ccc;
-
-border-radius:10px;
-
+.success-icon{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:#dcfce7;
+    color:#16a34a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:34px;
+    margin:auto;
+    margin-bottom:20px;
 }
 
-.continue-btn{
-
-width:100%;
-
-height:45px;
-
-background:#2962ff;
-
-color:#fff;
-
-border:none;
-
-border-radius:8px;
-
-font-size:17px;
-
-font-weight:600;
-
-cursor:pointer;
-
+.otp-wrapper{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:25px 0;
 }
 
-.tick{
+.otp-box{
+    width:48px;
+    height:48px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
 
-font-size:42px;
+.popup-btn{
+    width:100%;
+    height:48px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
 
-color:#31c451;
-
-margin-bottom:15px;
-
+.popup-btn:hover{
+    background:#1d4ed8;
 }

@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom"; 
 import "./UserRegCandidate.css";
 import registerImage from "../assets/reg-c-image.png";
@@ -27,7 +28,19 @@ const UserRegCandidate = () => {
     resume: null,
     terms: false,
   });
+const OTP = "829749";
 
+const [emailVerified, setEmailVerified] = useState(false);
+
+const [showEmailPopup, setShowEmailPopup] = useState(false);
+
+const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+const [otp, setOtp] = useState(["","","","","",""]);
+
+const [otpVerified, setOtpVerified] = useState(false);
+
+const inputRefs = useRef([]);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -37,13 +50,66 @@ const UserRegCandidate = () => {
       [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
     });
   };
+const openVerificationPopup = () => {
+  if (!formData.email) {
+    alert("Please enter email");
+    return;
+  }
 
+  setOtp(["","","","","",""]);
+  setOtpVerified(false);
+  setShowEmailPopup(true);
+};
+
+const handleOtpChange = (value,index)=>{
+
+  if(!/^\d?$/.test(value)) return;
+
+  const updated=[...otp];
+  updated[index]=value;
+
+  setOtp(updated);
+
+  if(value && index<5){
+      inputRefs.current[index+1].focus();
+  }
+};
+
+const verifyOtp=()=>{
+
+   if(otp.join("")===OTP){
+       setOtpVerified(true);
+   }else{
+       alert("Invalid OTP");
+   }
+
+};
+
+const continueVerification=()=>{
+
+   setShowEmailPopup(false);
+
+   setShowSuccessPopup(true);
+
+};
+
+const finishVerification=()=>{
+
+   setShowSuccessPopup(false);
+
+   setEmailVerified(true);
+
+};
   const validate = () => {
     let newErrors = {};
     if (!formData.fullName.trim()) newErrors.fullName = "Full Name is required";
     if (!formData.userName.trim()) newErrors.userName = "User Name is required";
     if (!/^[6-9]\d{9}$/.test(formData.mobile)) newErrors.mobile = "Enter valid mobile number";
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) newErrors.email = "Enter valid email";
+if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email))
+    newErrors.email = "Enter valid email";
+
+if (!emailVerified)
+    newErrors.email = "Please verify your email";  
     if (!formData.degree.trim()) newErrors.degree = "Degree is required";
     if (formData.password.length < 8) newErrors.password = "Minimum 8 characters";
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match";
@@ -53,14 +119,28 @@ const UserRegCandidate = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      alert("Registration Successful");
-      console.log("Submitting Candidate Context:", { role, ...formData });
+  if (validate()) {
+
+    // Check Email Verification
+    if (!emailVerified) {
+      alert("Please verify your email first.");
+      return;
     }
-  };
+
+    alert("Registration Successful");
+
+    console.log("Submitting Candidate Context:", {
+      role,
+      ...formData,
+    });
+
+    // Optional: Navigate to Login Page
+    // navigate("/Resume-builder/login/candidate");
+  }
+};
 
   return (
     <div className="urc-register-page-wrapper">
@@ -144,11 +224,46 @@ const UserRegCandidate = () => {
                 <input type="text" name="degree" placeholder="B.E Civil Engineer" value={formData.degree} onChange={handleChange} />
                 {errors.degree && <small className="urc-error-text">{errors.degree}</small>}
               </div>
-              <div className="urc-input-group">
-                <label>Enter your Email Address </label>
-                <input type="email" name="email" placeholder="Thilak1@gmail.com" value={formData.email} onChange={handleChange} />
-                {errors.email && <small className="urc-error-text">{errors.email}</small>}
-              </div>
+             <div className="urc-input-group">
+  <label>Email Address</label>
+
+  <div className="urc-email-wrapper">
+
+    <input
+      type="email"
+      name="email"
+      placeholder="reo@gmail.com"
+      value={formData.email}
+      onChange={handleChange}
+      disabled={emailVerified}
+    />
+
+    {!emailVerified ? (
+      <button
+        type="button"
+        className="urc-verify-btn"
+        onClick={openVerificationPopup}
+      >
+        Verify
+      </button>
+    ) : (
+      <button
+        type="button"
+        className="urc-verified-btn"
+      >
+        Verified
+      </button>
+    )}
+
+  </div>
+
+  {errors.email && (
+    <small className="urc-error-text">
+      {errors.email}
+    </small>
+  )}
+</div>
+
               <div className="urc-input-group urc-password-wrapper">
                 <label>Password </label>
                 <div className="urc-input-with-icon">
@@ -200,6 +315,108 @@ const UserRegCandidate = () => {
           </form>
         </div>
       </div>
+      {/* ================= EMAIL VERIFICATION POPUP ================= */}
+
+{showEmailPopup && (
+  <div className="email-popup-overlay">
+
+    <div className="email-popup">
+
+      <div className="popup-icon">
+        📩
+      </div>
+
+      <h2>Email Verification</h2>
+
+      <p>
+        We've Sent a Code To
+      </p>
+
+      <strong>{formData.email}</strong>
+
+      <p>Please enter it below</p>
+
+      <div className="otp-wrapper">
+
+        {otp.map((digit, index) => (
+
+          <input
+            key={index}
+            ref={(el) => (inputRefs.current[index] = el)}
+            type="text"
+            maxLength="1"
+            value={digit}
+            onChange={(e) =>
+              handleOtpChange(e.target.value, index)
+            }
+            className="otp-box"
+          />
+
+        ))}
+
+      </div>
+
+      {!otpVerified ? (
+
+        <button
+          className="popup-btn"
+          onClick={verifyOtp}
+        >
+          Verify
+        </button>
+
+      ) : (
+
+        <button
+          className="popup-btn"
+          onClick={continueVerification}
+        >
+          Continue
+        </button>
+
+      )}
+
+    </div>
+
+  </div>
+)}
+{/* ================= SUCCESS POPUP ================= */}
+
+{showSuccessPopup && (
+
+<div className="email-popup-overlay">
+
+<div className="success-popup">
+
+<div className="success-icon">
+
+✅
+
+</div>
+
+<h2>
+
+Verification is Confirmed
+
+</h2>
+
+<button
+
+className="popup-btn"
+
+onClick={finishVerification}
+
+>
+
+Continue
+
+</button>
+
+</div>
+
+</div>
+
+)}
     </div>
   );
 };
