@@ -1,0 +1,1024 @@
+/* ==========================================
+   Google Font
+========================================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+}
+
+/* ==========================================
+   Main Container
+========================================== */
+
+.recruiter-profile{
+    width:100%;
+    min-height:100vh;
+    padding:25px;
+    background:#f4f7fb;
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.profile-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:22px;
+}
+
+.profile-header h2{
+    font-size:30px;
+    font-weight:700;
+    color:#0F172A;
+    line-height:1.2;
+}
+
+.breadcrumb{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    color:#64748b;
+}
+
+.breadcrumb .divider{
+    color:#94a3b8;
+}
+
+.breadcrumb .active{
+    color:#2563eb;
+    font-weight:600;
+}
+
+/* ==========================================
+   Header Buttons
+========================================== */
+
+.header-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.password-btn,
+.edit-btn{
+    border:none;
+    outline:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 22px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.password-btn img,
+.edit-btn img{
+    width:18px;
+    height:18px;
+}
+
+.password-btn{
+    background:#fff;
+    border:1px solid #2563eb;
+    color:#2563eb;
+}
+
+.password-btn:hover{
+    background:#2563eb;
+    color:#fff;
+}
+
+.edit-btn{
+    background:#2563eb;
+    color:#fff;
+}
+
+.edit-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ==========================================
+   Grid Layout
+========================================== */
+/* 
+.profile-grid{
+    display:grid;
+    grid-template-columns:320px 1fr 1fr;
+    gap:24px;
+} */
+
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:280px 1fr 1fr;
+    gap:18px;
+}
+
+/* ==========================================
+   Common Card
+========================================== */
+.card{
+    background:#ffffff;
+    border-radius:20px;
+    border:1px solid #E2E8F0;
+    padding:24px;
+    box-shadow:0 8px 30px rgba(15,23,42,.08);
+}
+
+.card-title{
+    font-size:20px;
+    font-weight:700;
+    color:#0F172A;
+    margin-bottom:22px;
+}
+
+/* ==========================================
+   Profile Card
+========================================== */
+
+.profile-card{
+    position:relative;
+    text-align:center;
+}
+
+.active-badge{
+    position:absolute;
+    top:18px;
+    right:18px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#e8f8ee;
+    color:#16a34a;
+    font-size:12px;
+    font-weight:600;
+    padding:5px 12px;
+    border-radius:30px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#16a34a;
+}
+
+.profile-image{
+
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:5px solid #EAF2FF;
+    object-fit:cover;
+}
+
+.profile-card h3{
+    font-size:24px;
+    font-weight:700;
+    color:#0F172A;
+    margin-top:15px;
+    margin-bottom:8px;
+}
+
+.designation{
+    font-size:15px;
+    color:#64748B;
+    font-weight:500;
+}
+
+.company-name{
+    font-size:14px;
+    color:#94A3B8;
+}
+
+.employee-id{
+    margin-top:18px;
+    margin-bottom:28px;
+    padding:10px 18px;
+    border-radius:8px;
+    background:#EFF6FF;
+    color:#2563EB;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* ==========================================
+   Contact List
+========================================== */
+
+.contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    text-align:left;
+}
+
+.contact-item{
+    gap:14px;
+    margin-bottom:18px;
+}
+
+.contact-item img{
+    width:20px;
+    height:20px;
+}
+
+.contact-item span{
+    font-size:14px;
+    color:#475569;
+    font-weight:500;
+}
+
+
+/* part2 */
+
+/* ==========================================
+   Security Card
+========================================== */
+
+.security-card{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.security-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    border-bottom:1px solid #edf2f7;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.security-item:last-child{
+    border-bottom:none;
+}
+
+.security-item:hover{
+    background:#f8fafc;
+    padding-left:8px;
+    padding-right:8px;
+    border-radius:8px;
+}
+
+.security-item .left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.security-item .left img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+}
+
+.security-item .left span{
+    font-size:14px;
+    color:#374151;
+    font-weight:500;
+}
+
+.security-item .right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.security-item .right img{
+    width:16px;
+    height:16px;
+}
+
+.enabled{
+    background:#dcfce7;
+    color:#16a34a;
+    font-size:12px;
+    font-weight:600;
+    padding:5px 10px;
+    border-radius:20px;
+}
+
+.device-count{
+    color:#2563eb;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* ==========================================
+   Documents Card
+========================================== */
+
+.document-card{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.document-item{
+    display:flex;
+    align-items:flex-start;
+    gap:15px;
+    padding:12px 0;
+    border-bottom:1px solid #edf2f7;
+}
+
+.document-item:last-child{
+    border-bottom:none;
+}
+
+.document-item img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.document-item h5{
+    font-size:15px;
+    font-weight:600;
+    color:#1f2937;
+    margin-bottom:6px;
+    line-height:1.4;
+}
+
+.document-item p{
+    font-size:13px;
+    color:#6b7280;
+}
+
+/* ==========================================
+   Hover Effects
+========================================== */
+
+.card{
+    transition:all .3s ease;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+}
+
+.document-item:hover{
+    background:#f9fafb;
+    border-radius:8px;
+    padding-left:8px;
+    padding-right:8px;
+}
+
+.contact-item:hover{
+    color:#2563eb;
+}
+
+.skills span{
+    transition:.3s;
+}
+
+.skills span:hover{
+    background:#2563eb;
+    color:#fff;
+}
+
+.activity-list li{
+    transition:.3s;
+}
+
+.activity-list li:hover{
+    background:#f8fafc;
+    border-radius:8px;
+    padding:8px;
+    margin-left:-8px;
+    margin-right:-8px;
+}
+
+/* ==========================================
+   Smooth Animation
+========================================== */
+
+.profile-card,
+.company-card,
+.professional-card,
+.activity-card,
+.security-card,
+.document-card{
+    animation:fadeUp .5s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+
+/* ==========================================
+   Responsive - Large Screens
+========================================== */
+
+@media (max-width:1200px){
+
+    .profile-grid{
+        grid-template-columns:280px 1fr;
+    }
+
+    .activity-card,
+    .security-card,
+    .document-card{
+        grid-column:span 2;
+    }
+
+}
+
+/* ==========================================
+   Tablet
+========================================== */
+
+@media (max-width:992px){
+
+    .recruiter-profile{
+        padding:20px;
+    }
+
+    .profile-header{
+        flex-direction:column;
+        gap:20px;
+        align-items:flex-start;
+    }
+
+    .header-buttons{
+        width:100%;
+        display:flex;
+        justify-content:flex-start;
+        flex-wrap:wrap;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .profile-card,
+    .company-card,
+    .professional-card,
+    .activity-card,
+    .security-card,
+    .document-card{
+        grid-column:span 1;
+    }
+
+}
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width:768px){
+
+    .recruiter-profile{
+        padding:15px;
+    }
+
+    .profile-header h2{
+        font-size:24px;
+    }
+
+    .breadcrumb{
+        font-size:13px;
+        flex-wrap:wrap;
+    }
+
+    .header-buttons{
+        flex-direction:column;
+        width:100%;
+    }
+
+  .password-btn,
+.edit-btn{
+
+    height:48px;
+    padding:0 22px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+}
+
+    .card{
+        padding:18px;
+        border-radius:12px;
+    }
+
+    .profile-image{
+        width:90px;
+        height:90px;
+    }
+
+    .profile-card h3{
+        font-size:20px;
+    }
+
+    .employee-id{
+        width:100%;
+        text-align:center;
+    }
+
+    .contact-item{
+        align-items:flex-start;
+    }
+
+    .contact-item span{
+        word-break:break-word;
+        font-size:13px;
+    }
+
+    .company-top{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .company-details{
+        width:100%;
+    }
+
+    .info-row{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:6px;
+    }
+
+    .skills{
+        justify-content:flex-start;
+    }
+
+    .activity-list li{
+        gap:12px;
+    }
+
+    .security-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .security-item .right{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .document-item{
+        align-items:flex-start;
+    }
+
+}
+
+/* ==========================================
+   Small Mobile
+========================================== */
+
+@media (max-width:480px){
+
+    .recruiter-profile{
+        padding:12px;
+    }
+
+    .profile-header h2{
+        font-size:20px;
+    }
+
+    .card-title{
+        font-size:16px;
+    }
+
+    .profile-card h3{
+        font-size:18px;
+    }
+
+    .designation,
+    .company-name{
+        font-size:13px;
+    }
+
+    .contact-item img,
+    .security-item .left img{
+        width:18px;
+        height:18px;
+    }
+
+    .contact-item span,
+    .document-item p,
+    .info-row span,
+    .info-row strong{
+        font-size:13px;
+    }
+
+    .skills span{
+        font-size:12px;
+        padding:7px 10px;
+    }
+
+    .activity-list h5{
+        font-size:13px;
+    }
+
+    .activity-list span{
+        font-size:12px;
+    }
+
+    .document-item img{
+        width:36px;
+        height:36px;
+    }
+
+}
+
+
+
+
+
+/* Company Card */
+
+.company-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:24px;
+}
+
+/* Image Left - Text Right */
+
+.company-top{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    margin-top:20px;
+    margin-bottom:30px;
+}
+
+.company-image{
+    flex:0 0 90px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.company-image img{
+    width:80px;
+    height:80px;
+    object-fit:contain;
+}
+
+.company-details{
+    flex:1;
+}
+
+.company-details h4{
+    font-size:28px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:16px;
+}
+
+.company-details p{
+    font-size:15px;
+    color:#374151;
+    margin-bottom:10px;
+    line-height:1.7;
+}
+
+.company-details strong{
+    font-weight:600;
+}
+
+.website{
+    color:#2563EB;
+}
+
+.about-company h4{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+    color:#111827;
+}
+
+.about-company p{
+    font-size:15px;
+    color:#4B5563;
+    line-height:1.9;
+    text-align:justify;
+}
+
+
+
+
+/* ============================
+   Professional Card
+============================ */
+
+.professional-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:24px;
+}
+
+.professional-card .card-title{
+    font-size:20px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:28px;
+}
+
+/* Two Column */
+
+.info-row{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.label{
+    font-size:15px;
+    color:#374151;
+    font-weight:500;
+}
+
+.value{
+    font-size:15px;
+    color:#111827;
+    font-weight:600;
+}
+
+/* Skills */
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:18px 0 25px;
+}
+
+.skills span{
+
+    background:#EEF4FF;
+    color:#2563EB;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+    font-size:13px;
+
+    font-weight:500;
+}
+
+/* Preferred Location */
+
+.location-box{
+    margin-top:8px;
+}
+
+.location-box p{
+    margin-top:10px;
+    font-size:15px;
+    color:#111827;
+    line-height:1.7;
+}
+
+
+
+/* ===========================
+   Recent Activity
+=========================== */
+
+.activity-card{
+
+    background:#fff;
+    border:1px solid #E5E7EB;
+    border-radius:16px;
+    padding:24px;
+
+}
+
+.activity-card .card-title{
+
+    font-size:20px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:25px;
+
+}
+
+.activity-list{
+
+    position:relative;
+
+}
+
+.activity-list::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:6px;
+    top:5px;
+    bottom:5px;
+
+    width:2px;
+
+    background:#D6E4FF;
+
+}
+
+.activity-item{
+
+    display:flex;
+    gap:18px;
+    position:relative;
+    margin-bottom:28px;
+
+}
+
+.activity-item:last-child{
+
+    margin-bottom:0;
+
+}
+
+.activity-icon{
+
+    width:12px;
+    height:12px;
+
+    background:#2563EB;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+
+    position:relative;
+    z-index:2;
+
+}
+
+.activity-content{
+
+    flex:1;
+
+}
+
+.activity-content h5{
+
+    font-size:15px;
+    font-weight:600;
+    color:#111827;
+    line-height:1.5;
+    margin-bottom:6px;
+
+}
+
+.activity-content p{
+
+    font-size:14px;
+    color:#6B7280;
+
+}
+
+
+
+
+/* ===========================
+   Security Card
+=========================== */
+
+.security-card{
+    background:#fff;
+    border:1px solid #E5E7EB;
+    border-radius:16px;
+    padding:24px;
+}
+
+.security-card .card-title{
+    font-size:20px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:25px;
+}
+
+/* Row */
+
+.security-item{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 0;
+
+    border-bottom:1px solid #E5E7EB;
+
+}
+
+.security-item:last-child{
+
+    border-bottom:none;
+
+}
+
+/* Left */
+
+.security-left{
+
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+}
+
+.security-left img{
+
+    width:22px;
+    height:22px;
+    object-fit:contain;
+
+}
+
+.security-left span{
+
+    font-size:16px;
+    font-weight:500;
+    color:#374151;
+
+}
+
+/* Right */
+
+.security-right{
+
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+}
+
+.enabled{
+
+    background:#DCFCE7;
+    color:#16A34A;
+
+    font-size:13px;
+    font-weight:600;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+}
+
+.device-text{
+
+    color:#2563EB;
+    font-size:14px;
+    font-weight:600;
+
+}
+
+/* Arrow */
+
+.arrow-icon{
+
+    width:18px;
+    height:18px;
+    cursor:pointer;
+}
+
+.arrow-icon-small{
+
+    width:14px;
+    height:14px;
+}
+
+
+
